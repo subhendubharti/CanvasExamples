@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+#canvas{
+width:300px;
+height:300px;
+border:1px solid red;
+}
+</style>
+</head>
+<body>
+<!--  Idea From https://billmill.org/static/canvastutorial/bounce.html   -->
+<canvas id=canvas></canvas>
+<button onclick="init()">Start</button>
+<script>
+//https://billmill.org/static/canvastutorial/bounce.html
+var x = 1;
+var y = 1;
+var x2 = 50;
+var y2 = 50;
+var dx = 3;
+var dy = 4;
+var dx2=1;
+var dy2=2;
+var ctx;
+var WIDTH; 
+var HEIGHT;
+
+function circle(x,y,r) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function rect(x,y,w,h) {
+  ctx.beginPath();
+  ctx.rect(x,y,w,h);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function clear() {
+  ctx.clearRect(0, 0, parseInt(WIDTH), parseInt(HEIGHT));
+}
+
+function init() {
+  /*ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width()
+  HEIGHT = $("#canvas").height()*/
+  canvasElement=document.getElementById("canvas");
+  ctx=canvasElement.getContext("2d");
+  WIDTH=canvasElement.style.width;
+  HEIGHT=canvasElement.style.height;
+  return setInterval(draw, 10);
+}
+function draw() {
+  clear();
+  rect(125,120,50,50)
+  circle(x, y, 10);
+  circle(x2,y2,10);
+  if((x>125 && x<175)&&(y>125 && y<175) )
+  {
+    dx=0;
+    dy=0;
+    x=150;
+    y=150;
+  }else 
+  {if (x + dx > WIDTH || x + dx < 0)
+  
+    dx = -dx;
+  if (y + dy > HEIGHT || y + dy < 0)
+    dy = -dy;
+   x += dx;
+  y += dy;
+  }
+  
+  
+  
+  if((x2>125 && x2<175)&&(y2>125 && y2<175) )
+  {
+    dx2=0;
+    dy2=0;
+    x2=150;
+    y2=150;
+  }else{
+  if (x2 + dx2 > WIDTH || x2 + dx2 < 0)
+    dx2 = -dx2;
+  if (y2 + dy2 > HEIGHT || y2 + dy2 < 0)
+    dy2 = -dy2;
+    x2 += dx2;
+  y2 += dy2;
+  }
+ 
+}
+init();
+</script>
+</body>
+</html>
